@@ -1,0 +1,47 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://sprites/animations/frames/elf_idle_0.png" id="1_ufrwr"]
+[ext_resource type="Texture2D" path="res://sprites/animations/frames/elf_idle_1.png" id="2_hqk2h"]
+[ext_resource type="Texture2D" path="res://sprites/animations/frames/elf_idle_2.png" id="3_7cnlt"]
+[ext_resource type="Texture2D" path="res://sprites/animations/frames/elf_idle_3.png" id="4_nsybi"]
+[ext_resource type="Texture2D" path="res://sprites/animations/frames/elf_walk_0.png" id="5_4gy6v"]
+[ext_resource type="Texture2D" path="res://sprites/animations/frames/elf_walk_1.png" id="6_m1y7x"]
+[ext_resource type="Texture2D" path="res://sprites/animations/frames/elf_walk_2.png" id="7_bp6pf"]
+[ext_resource type="Texture2D" path="res://sprites/animations/frames/elf_walk_3.png" id="8_7g8it"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ufrwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hqk2h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7cnlt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nsybi")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_4gy6v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_m1y7x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bp6pf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7g8it")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 8.0
+}]

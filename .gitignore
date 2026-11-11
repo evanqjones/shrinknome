@@ -1,0 +1,6 @@
+# Godot editor cache
+.godot/
+/android/
+
+# Generated web export (built by the Pages workflow)
+/public/

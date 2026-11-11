@@ -1,0 +1,2276 @@
+[gd_scene format=3 uid="uid://cpbn5y06ba5pf"]
+
+[ext_resource type="Script" uid="uid://duwab4hfawow1" path="res://scripts/level.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://c5r6cjo4wwah3" path="res://scripts/player.gd" id="2_player"]
+[ext_resource type="SpriteFrames" path="res://resources/elf_frames.tres" id="4_elf"]
+[ext_resource type="SpriteFrames" uid="uid://b5ffp4vqxf1bk" path="res://resources/rock_frames.tres" id="5_rock"]
+[ext_resource type="SpriteFrames" uid="uid://cfwjkj3u4yso0" path="res://resources/tree_frames.tres" id="6_tree"]
+[ext_resource type="SpriteFrames" uid="uid://dxyd2vp4blvtk" path="res://resources/robot_frames.tres" id="7_robot"]
+[ext_resource type="Script" uid="uid://thdc2y4r0npo" path="res://scripts/rock_enemy.gd" id="8_rock_enemy"]
+[ext_resource type="Script" uid="uid://bih843qk1ulli" path="res://scripts/tree_enemy.gd" id="9_tree_enemy"]
+[ext_resource type="Script" uid="uid://d0qygfpgbouw3" path="res://scripts/robot_enemy.gd" id="10_robot_enemy"]
+[ext_resource type="Texture2D" uid="uid://dgdp2vlf33i3y" path="res://sprites/tree_prop.png" id="11_tree_prop"]
+[ext_resource type="Texture2D" uid="uid://00eoqo7bw1rc" path="res://sprites/grass_tuft.png" id="12_grass"]
+[ext_resource type="Texture2D" uid="uid://dq2bmxx81wten" path="res://sprites/pot_of_gold.png" id="13_pot"]
+[ext_resource type="Texture2D" uid="uid://cecpq6xljggx" path="res://sprites/cloud_sprite.png" id="14_cloud"]
+[ext_resource type="Texture2D" uid="uid://b5vqeb00evjst" path="res://sprites/house_sprite.png" id="15_house"]
+
+[ext_resource type="Texture2D" path="res://sprites/grass_ground.png" id="16_grass_ground"]
+[ext_resource type="Texture2D" path="res://sprites/dirt_path.png" id="17_dirt_path"]
+[ext_resource type="Texture2D" path="res://sprites/arena_floor.png" id="18_arena_floor"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_grass_texture"]
+albedo_texture = ExtResource("16_grass_ground")
+texture_filter = 1
+uv1_scale = Vector3(7, 1, 2)
+roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_background_grass"]
+albedo_color = Color(0.20, 0.52, 0.22, 1)
+roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_path_texture"]
+albedo_texture = ExtResource("17_dirt_path")
+texture_filter = 1
+uv1_scale = Vector3(10, 1, 1)
+roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_arena_texture"]
+albedo_texture = ExtResource("18_arena_floor")
+texture_filter = 1
+uv1_scale = Vector3(4, 1, 4)
+roughness = 1.0
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMaterial_level"]
+sky_top_color = Color(0.17, 0.48, 0.84, 1)
+sky_horizon_color = Color(0.71, 0.87, 1, 1)
+ground_bottom_color = Color(0.71, 0.87, 1, 1)
+ground_horizon_color = Color(0.71, 0.87, 1, 1)
+
+[sub_resource type="Sky" id="Sky_level"]
+sky_material = SubResource("SkyMaterial_level")
+
+[sub_resource type="Environment" id="Environment_level"]
+background_mode = 2
+sky = SubResource("Sky_level")
+ambient_light_source = 2
+ambient_light_color = Color(0.77, 0.88, 1, 1)
+ambient_light_energy = 0.75
+reflected_light_source = 2
+
+[sub_resource type="CapsuleShape3D" id="Capsule_player"]
+radius = 0.32
+height = 1.7
+
+[sub_resource type="StandardMaterial3D" id="Mat_ink"]
+albedo_color = Color(0.07, 0.09, 0.13, 1)
+
+[sub_resource type="BoxMesh" id="LevelBox_0"]
+size = Vector3(30, 0.3, 8.2)
+
+[sub_resource type="StandardMaterial3D" id="Mat_dirt"]
+albedo_color = Color(0.54, 0.38, 0.24, 1)
+
+[sub_resource type="BoxMesh" id="LevelBox_1"]
+size = Vector3(29.9, 0.25, 8.1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_grass_light"]
+albedo_color = Color(0.39, 0.79, 0.41, 1)
+
+[sub_resource type="BoxMesh" id="LevelBox_2"]
+size = Vector3(29.94, 0.05, 8.15)
+
+[sub_resource type="BoxShape3D" id="LevelShape_0"]
+size = Vector3(30, 0.3, 8.2)
+
+[sub_resource type="BoxMesh" id="LevelBox_3"]
+size = Vector3(5, 0.3, 8.2)
+
+[sub_resource type="BoxMesh" id="LevelBox_4"]
+size = Vector3(4.9, 0.25, 8.1)
+
+[sub_resource type="BoxMesh" id="LevelBox_5"]
+size = Vector3(4.94, 0.05, 8.15)
+
+[sub_resource type="BoxShape3D" id="LevelShape_1"]
+size = Vector3(5, 0.3, 8.2)
+
+[sub_resource type="BoxMesh" id="LevelBox_6"]
+size = Vector3(8, 0.3, 8.2)
+
+[sub_resource type="BoxMesh" id="LevelBox_7"]
+size = Vector3(7.9, 0.25, 8.1)
+
+[sub_resource type="BoxMesh" id="LevelBox_8"]
+size = Vector3(7.94, 0.05, 8.15)
+
+[sub_resource type="BoxShape3D" id="LevelShape_2"]
+size = Vector3(8, 0.3, 8.2)
+
+[sub_resource type="BoxMesh" id="LevelBox_9"]
+size = Vector3(13, 0.3, 8.2)
+
+[sub_resource type="BoxMesh" id="LevelBox_10"]
+size = Vector3(12.9, 0.25, 8.1)
+
+[sub_resource type="BoxMesh" id="LevelBox_11"]
+size = Vector3(12.94, 0.05, 8.15)
+
+[sub_resource type="BoxShape3D" id="LevelShape_3"]
+size = Vector3(13, 0.3, 8.2)
+
+[sub_resource type="BoxMesh" id="LevelBox_12"]
+size = Vector3(33, 0.3, 8.2)
+
+[sub_resource type="BoxMesh" id="LevelBox_13"]
+size = Vector3(32.9, 0.25, 8.1)
+
+[sub_resource type="BoxMesh" id="LevelBox_14"]
+size = Vector3(32.94, 0.05, 8.15)
+
+[sub_resource type="BoxShape3D" id="LevelShape_4"]
+size = Vector3(33, 0.3, 8.2)
+
+[sub_resource type="CylinderMesh" id="LevelCylinder_0"]
+top_radius = 4.2
+bottom_radius = 4.2
+height = 0.025
+radial_segments = 24
+
+[sub_resource type="StandardMaterial3D" id="Mat_rock_arena"]
+albedo_color = Color(0.56, 0.7, 0.39, 1)
+
+[sub_resource type="CylinderMesh" id="LevelCylinder_1"]
+top_radius = 4.0
+bottom_radius = 4.0
+height = 0.025
+radial_segments = 24
+
+[sub_resource type="StandardMaterial3D" id="Mat_tree_arena"]
+albedo_color = Color(0.38, 0.77, 0.61, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_robot_arena"]
+albedo_color = Color(0.54, 0.67, 0.77, 1)
+
+[sub_resource type="BoxMesh" id="LevelBox_15"]
+size = Vector3(1.3, 0.76, 7.9)
+
+[sub_resource type="StandardMaterial3D" id="Mat_wood"]
+albedo_color = Color(0.7, 0.4, 0.2, 1)
+
+[sub_resource type="BoxMesh" id="LevelBox_16"]
+size = Vector3(1.13, 0.58, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="Mat_wood_light"]
+albedo_color = Color(0.84, 0.56, 0.27, 1)
+
+[sub_resource type="BoxMesh" id="LevelBox_17"]
+size = Vector3(1.13, 0.07, 7.8)
+
+[sub_resource type="BoxMesh" id="LevelBox_18"]
+size = Vector3(1.16, 0.04, 0.13)
+
+[sub_resource type="BoxShape3D" id="LevelShape_5"]
+size = Vector3(1.3, 0.76, 7.9)
+
+[sub_resource type="BoxShape3D" id="LevelShape_6"]
+size = Vector3(1.5, 1.5, 1.5)
+
+[sub_resource type="BoxMesh" id="TrailMesh_0"]
+size = Vector3(30, 0.035, 2.3)
+
+[sub_resource type="BoxMesh" id="TrailMesh_1"]
+size = Vector3(5, 0.035, 2.3)
+
+[sub_resource type="BoxMesh" id="TrailMesh_2"]
+size = Vector3(8, 0.035, 2.3)
+
+[sub_resource type="BoxMesh" id="TrailMesh_3"]
+size = Vector3(13, 0.035, 2.3)
+
+[sub_resource type="BoxMesh" id="TrailMesh_4"]
+size = Vector3(8, 0.035, 2.3)
+
+[sub_resource type="BoxMesh" id="TrailMesh_5"]
+size = Vector3(33, 0.035, 2.3)
+
+[sub_resource type="PlaneMesh" id="BackgroundGroundMesh"]
+size = Vector2(500, 500)
+
+[node name="Level" type="Node3D" unique_id=1606426222]
+script = ExtResource("1_main")
+
+[node name="BackgroundGround" type="MeshInstance3D" parent="." groups=["background_ground"]]
+position = Vector3(0, -0.34, 0)
+mesh = SubResource("BackgroundGroundMesh")
+material_override = SubResource("Mat_background_grass")
+cast_shadow = 0
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1970130708]
+transform = Transform3D(0.90630776, 0.34618863, -0.24240388, 0, 0.57357645, 0.81915206, 0.42261827, -0.74240386, 0.5198368, 0, 0, 0)
+light_energy = 1.4
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1881443093]
+environment = SubResource("Environment_level")
+
+[node name="FollowCamera" type="Camera3D" parent="." unique_id=1020323961]
+current = true
+fov = 62.0
+near = 0.1
+far = 100.0
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1912406785]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0.87, 0)
+script = ExtResource("2_player")
+min_world_x = -47.5
+max_world_x = 47.5
+min_world_z = -3.35
+max_world_z = 3.35
+
+[node name="Collision" type="CollisionShape3D" parent="Player" unique_id=1089563559]
+shape = SubResource("Capsule_player")
+
+[node name="Visual" type="AnimatedSprite3D" parent="Player" unique_id=323558675]
+cast_shadow = 0
+pixel_size = 0.03
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("4_elf")
+animation = &"idle"
+
+[node name="Rock" type="Node3D" parent="." unique_id=1940310093]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -0.7)
+script = ExtResource("8_rock_enemy")
+
+[node name="Visual" type="AnimatedSprite3D" parent="Rock" unique_id=1563180443]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.988, 0)
+cast_shadow = 0
+pixel_size = 0.0442
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("5_rock")
+animation = &"idle"
+
+[node name="Tree" type="Node3D" parent="." unique_id=35720246]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.2, 0.8)
+script = ExtResource("9_tree_enemy")
+
+[node name="Visual" type="AnimatedSprite3D" parent="Tree" unique_id=841753530]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.066, 0)
+cast_shadow = 0
+pixel_size = 0.0377
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("6_tree")
+animation = &"idle"
+
+[node name="Robot" type="Node3D" parent="." unique_id=739825121]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, -0.6)
+script = ExtResource("10_robot_enemy")
+min_world_x = -47.5
+max_world_x = 47.5
+min_world_z = -3.35
+max_world_z = 3.35
+
+[node name="Visual" type="AnimatedSprite3D" parent="Robot" unique_id=970316441]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.235, 0)
+cast_shadow = 0
+pixel_size = 0.0455
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("7_robot")
+animation = &"idle"
+
+[node name="Rock2" type="Node3D" parent="." unique_id=139413805]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 1.1)
+script = ExtResource("8_rock_enemy")
+
+[node name="Visual" type="AnimatedSprite3D" parent="Rock2" unique_id=1748863729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.988, 0)
+cast_shadow = 0
+pixel_size = 0.0442
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("5_rock")
+animation = &"idle"
+
+[node name="Tree2" type="Node3D" parent="." unique_id=1535249357]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.2, -0.8)
+script = ExtResource("9_tree_enemy")
+
+[node name="Visual" type="AnimatedSprite3D" parent="Tree2" unique_id=1452011361]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.066, 0)
+cast_shadow = 0
+pixel_size = 0.0377
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("6_tree")
+animation = &"idle"
+
+[node name="Robot2" type="Node3D" parent="." unique_id=333824637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, 1)
+script = ExtResource("10_robot_enemy")
+min_world_x = -47.5
+max_world_x = 47.5
+min_world_z = -3.35
+max_world_z = 3.35
+
+[node name="Visual" type="AnimatedSprite3D" parent="Robot2" unique_id=594460203]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.235, 0)
+cast_shadow = 0
+pixel_size = 0.0455
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("7_robot")
+animation = &"idle"
+
+[node name="Terrain" type="Node3D" parent="." unique_id=400505321]
+
+[node name="HomeField" type="StaticBody3D" parent="Terrain" unique_id=1528036323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33, -0.15, 0)
+
+[node name="DarkSoil" type="MeshInstance3D" parent="Terrain/HomeField" unique_id=1271508038]
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelBox_0")
+
+[node name="Soil" type="MeshInstance3D" parent="Terrain/HomeField" unique_id=1172961854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
+material_override = SubResource("Mat_dirt")
+mesh = SubResource("LevelBox_1")
+
+[node name="GrassTop" type="MeshInstance3D" parent="Terrain/HomeField" unique_id=1552082770]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.155, 0)
+material_override = SubResource("Mat_grass_texture")
+mesh = SubResource("LevelBox_2")
+
+[node name="Collision" type="CollisionShape3D" parent="Terrain/HomeField" unique_id=1550405589]
+shape = SubResource("LevelShape_0")
+
+[node name="RockField" type="StaticBody3D" parent="Terrain" unique_id=483697844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, -0.15, 0)
+
+[node name="DarkSoil" type="MeshInstance3D" parent="Terrain/RockField" unique_id=1703547355]
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelBox_3")
+
+[node name="Soil" type="MeshInstance3D" parent="Terrain/RockField" unique_id=1125985950]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
+material_override = SubResource("Mat_dirt")
+mesh = SubResource("LevelBox_4")
+
+[node name="GrassTop" type="MeshInstance3D" parent="Terrain/RockField" unique_id=37599672]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.155, 0)
+material_override = SubResource("Mat_grass_texture")
+mesh = SubResource("LevelBox_5")
+
+[node name="Collision" type="CollisionShape3D" parent="Terrain/RockField" unique_id=1840869228]
+shape = SubResource("LevelShape_1")
+
+[node name="Uphill" type="StaticBody3D" parent="Terrain" unique_id=1607385466]
+transform = Transform3D(0.98893833, -0.14832723, 0, 0.14832723, 0.98893833, 0, 0, 0, 1, -9, 0.45, 0)
+
+[node name="DarkSoil" type="MeshInstance3D" parent="Terrain/Uphill" unique_id=723598518]
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelBox_6")
+
+[node name="Soil" type="MeshInstance3D" parent="Terrain/Uphill" unique_id=1896445662]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
+material_override = SubResource("Mat_dirt")
+mesh = SubResource("LevelBox_7")
+
+[node name="GrassTop" type="MeshInstance3D" parent="Terrain/Uphill" unique_id=1052128085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.155, 0)
+material_override = SubResource("Mat_grass_texture")
+mesh = SubResource("LevelBox_8")
+
+[node name="Collision" type="CollisionShape3D" parent="Terrain/Uphill" unique_id=1786238944]
+shape = SubResource("LevelShape_2")
+
+[node name="TreeField" type="StaticBody3D" parent="Terrain" unique_id=483894166]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.05, 0)
+
+[node name="DarkSoil" type="MeshInstance3D" parent="Terrain/TreeField" unique_id=1421567825]
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelBox_9")
+
+[node name="Soil" type="MeshInstance3D" parent="Terrain/TreeField" unique_id=812220199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
+material_override = SubResource("Mat_dirt")
+mesh = SubResource("LevelBox_10")
+
+[node name="GrassTop" type="MeshInstance3D" parent="Terrain/TreeField" unique_id=589802931]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.155, 0)
+material_override = SubResource("Mat_grass_texture")
+mesh = SubResource("LevelBox_11")
+
+[node name="Collision" type="CollisionShape3D" parent="Terrain/TreeField" unique_id=1348736581]
+shape = SubResource("LevelShape_3")
+
+[node name="Downhill" type="StaticBody3D" parent="Terrain" unique_id=1492482576]
+transform = Transform3D(0.98893833, 0.14832723, 0, -0.14832723, 0.98893833, 0, 0, 0, 1, 12, 0.45, 0)
+
+[node name="DarkSoil" type="MeshInstance3D" parent="Terrain/Downhill" unique_id=486838856]
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelBox_6")
+
+[node name="Soil" type="MeshInstance3D" parent="Terrain/Downhill" unique_id=1604312318]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
+material_override = SubResource("Mat_dirt")
+mesh = SubResource("LevelBox_7")
+
+[node name="GrassTop" type="MeshInstance3D" parent="Terrain/Downhill" unique_id=1876596631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.155, 0)
+material_override = SubResource("Mat_grass_texture")
+mesh = SubResource("LevelBox_8")
+
+[node name="Collision" type="CollisionShape3D" parent="Terrain/Downhill" unique_id=117329169]
+shape = SubResource("LevelShape_2")
+
+[node name="RobotField" type="StaticBody3D" parent="Terrain" unique_id=1977728288]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, -0.15, 0)
+
+[node name="DarkSoil" type="MeshInstance3D" parent="Terrain/RobotField" unique_id=1597778482]
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelBox_12")
+
+[node name="Soil" type="MeshInstance3D" parent="Terrain/RobotField" unique_id=545390639]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
+material_override = SubResource("Mat_dirt")
+mesh = SubResource("LevelBox_13")
+
+[node name="GrassTop" type="MeshInstance3D" parent="Terrain/RobotField" unique_id=1138738645]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.155, 0)
+material_override = SubResource("Mat_grass_texture")
+mesh = SubResource("LevelBox_14")
+
+[node name="Collision" type="CollisionShape3D" parent="Terrain/RobotField" unique_id=1634708198]
+shape = SubResource("LevelShape_4")
+
+[node name="RockArena" type="Node3D" parent="." unique_id=373921826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, 0)
+
+[node name="Rim" type="MeshInstance3D" parent="RockArena" unique_id=264980969]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelCylinder_0")
+
+[node name="Center" type="MeshInstance3D" parent="RockArena" unique_id=465234250]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0)
+material_override = SubResource("Mat_arena_texture")
+mesh = SubResource("LevelCylinder_1")
+
+[node name="TreeArena" type="Node3D" parent="." unique_id=255407874]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8, 1.2, 0)
+
+[node name="Rim" type="MeshInstance3D" parent="TreeArena" unique_id=206123927]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelCylinder_0")
+
+[node name="Center" type="MeshInstance3D" parent="TreeArena" unique_id=935853916]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0)
+material_override = SubResource("Mat_arena_texture")
+mesh = SubResource("LevelCylinder_1")
+
+[node name="RobotArena" type="Node3D" parent="." unique_id=1560523321]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 0)
+
+[node name="Rim" type="MeshInstance3D" parent="RobotArena" unique_id=57542448]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelCylinder_0")
+
+[node name="Center" type="MeshInstance3D" parent="RobotArena" unique_id=1446496086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0)
+material_override = SubResource("Mat_arena_texture")
+mesh = SubResource("LevelCylinder_1")
+
+[node name="Obstacles" type="Node3D" parent="." unique_id=172920488]
+
+[node name="LowLog1" type="StaticBody3D" parent="Obstacles" unique_id=352063211]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 1.43, 0)
+
+[node name="InkOutline" type="MeshInstance3D" parent="Obstacles/LowLog1" unique_id=1387694838]
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelBox_15")
+
+[node name="BarkFront" type="MeshInstance3D" parent="Obstacles/LowLog1" unique_id=1227270996]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.98)
+material_override = SubResource("Mat_wood")
+mesh = SubResource("LevelBox_16")
+
+[node name="BarkTop" type="MeshInstance3D" parent="Obstacles/LowLog1" unique_id=1854909987]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+material_override = SubResource("Mat_wood_light")
+mesh = SubResource("LevelBox_17")
+
+[node name="BarkBandM2_2" type="MeshInstance3D" parent="Obstacles/LowLog1" unique_id=31638093]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, -2.2)
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelBox_18")
+
+[node name="BarkBand0_2" type="MeshInstance3D" parent="Obstacles/LowLog1" unique_id=487108312]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, 0.2)
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelBox_18")
+
+[node name="BarkBand2_1" type="MeshInstance3D" parent="Obstacles/LowLog1" unique_id=192163144]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, 2.1)
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelBox_18")
+
+[node name="Collision" type="CollisionShape3D" parent="Obstacles/LowLog1" unique_id=2114905962]
+shape = SubResource("LevelShape_5")
+
+[node name="LowLog2" type="StaticBody3D" parent="Obstacles" unique_id=1359864054]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 1.43, 0)
+
+[node name="InkOutline" type="MeshInstance3D" parent="Obstacles/LowLog2" unique_id=670722459]
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelBox_15")
+
+[node name="BarkFront" type="MeshInstance3D" parent="Obstacles/LowLog2" unique_id=215323243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.98)
+material_override = SubResource("Mat_wood")
+mesh = SubResource("LevelBox_16")
+
+[node name="BarkTop" type="MeshInstance3D" parent="Obstacles/LowLog2" unique_id=275088667]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+material_override = SubResource("Mat_wood_light")
+mesh = SubResource("LevelBox_17")
+
+[node name="BarkBandM2_2" type="MeshInstance3D" parent="Obstacles/LowLog2" unique_id=813896317]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, -2.2)
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelBox_18")
+
+[node name="BarkBand0_2" type="MeshInstance3D" parent="Obstacles/LowLog2" unique_id=1996019526]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, 0.2)
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelBox_18")
+
+[node name="BarkBand2_1" type="MeshInstance3D" parent="Obstacles/LowLog2" unique_id=1486951103]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, 2.1)
+material_override = SubResource("Mat_ink")
+mesh = SubResource("LevelBox_18")
+
+[node name="Collision" type="CollisionShape3D" parent="Obstacles/LowLog2" unique_id=1349474913]
+shape = SubResource("LevelShape_5")
+
+[node name="House" type="Node3D" parent="." unique_id=432815845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -2.8)
+
+[node name="HouseSprite" type="Sprite3D" parent="House" unique_id=584902630]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+pixel_size = 0.0058
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("15_house")
+
+[node name="Foliage" type="Node3D" parent="." unique_id=799488823]
+
+[node name="Tree_0_N" type="Sprite3D" parent="Foliage" unique_id=297765407]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.6676, 1.95, -5.9734)
+pixel_size = 0.0762
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_0_S" type="Sprite3D" parent="Foliage" unique_id=1331539694]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.4686, 1.95, 4.083321)
+pixel_size = 0.0728
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_1_N" type="Sprite3D" parent="Foliage" unique_id=1711073657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.8942, 1.95, -4.4050097)
+pixel_size = 0.0805
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_1_S" type="Sprite3D" parent="Foliage" unique_id=38203064]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.4273, 1.95, 7.1125)
+pixel_size = 0.0775
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_2_N" type="Sprite3D" parent="Foliage" unique_id=1284217436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.4114, 1.6479123, -3.3771095)
+pixel_size = 0.0734
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_2_S" type="Sprite3D" parent="Foliage" unique_id=291632739]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.1653, 1.95, 6.3439)
+pixel_size = 0.0839
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_3_N" type="Sprite3D" parent="Foliage" unique_id=1417381056]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.548, 1.95, -2.4511325)
+pixel_size = 0.0776
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_3_S" type="Sprite3D" parent="Foliage" unique_id=1162777107]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.3017, 1.95, 6.6703)
+pixel_size = 0.0857
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_4_N" type="Sprite3D" parent="Foliage" unique_id=2092333265]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.9464, 1.95, -2.4422474)
+pixel_size = 0.0818
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_4_S" type="Sprite3D" parent="Foliage" unique_id=310766639]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.1249, 1.95, 6.5539)
+pixel_size = 0.0737
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_5_N" type="Sprite3D" parent="Foliage" unique_id=127727657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.3559, 1.7721598, -2.6352909)
+pixel_size = 0.0823
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_5_S" type="Sprite3D" parent="Foliage" unique_id=1804604419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.7983, 1.95, 7.2558)
+pixel_size = 0.0836
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_6_N" type="Sprite3D" parent="Foliage" unique_id=1610565325]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4965, 1.95, -5.3597097)
+pixel_size = 0.0758
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_6_S" type="Sprite3D" parent="Foliage" unique_id=581943797]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5861, 1.95, 6.431)
+pixel_size = 0.078
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_7_N" type="Sprite3D" parent="Foliage" unique_id=1412424581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4099, 1.95, -3.7813096)
+pixel_size = 0.08
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_7_S" type="Sprite3D" parent="Foliage" unique_id=1086025082]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.514, 1.95, 7.6309)
+pixel_size = 0.0764
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_8_N" type="Sprite3D" parent="Foliage" unique_id=881404287]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6022, 1.95, -2.7558174)
+pixel_size = 0.0848
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_8_S" type="Sprite3D" parent="Foliage" unique_id=1973666988]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7596, 1.95, 6.801)
+pixel_size = 0.0847
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_9_N" type="Sprite3D" parent="Foliage" unique_id=1856244401]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2774, 1.95, -5.3602095)
+pixel_size = 0.0742
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_9_S" type="Sprite3D" parent="Foliage" unique_id=1648638748]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3076, 1.95, 6.2451)
+pixel_size = 0.0748
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_10_N" type="Sprite3D" parent="Foliage" unique_id=2131121125]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4159, 1.95, -4.7162094)
+pixel_size = 0.0835
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_10_S" type="Sprite3D" parent="Foliage" unique_id=363563429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3387, 1.95, 7.3623)
+pixel_size = 0.0825
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_11_N" type="Sprite3D" parent="Foliage" unique_id=1529180441]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7633, 1.95, -5.1196094)
+pixel_size = 0.075
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_11_S" type="Sprite3D" parent="Foliage" unique_id=215265222]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.202, 1.95, 6.1209)
+pixel_size = 0.0837
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_12_N" type="Sprite3D" parent="Foliage" unique_id=1925765045]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4438, 3.15, -5.3191094)
+pixel_size = 0.0844
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_12_S" type="Sprite3D" parent="Foliage" unique_id=1609283623]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9327, 3.15, 6.5157)
+pixel_size = 0.0813
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_13_N" type="Sprite3D" parent="Foliage" unique_id=1598857584]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9047, 3.15, -4.0549097)
+pixel_size = 0.0778
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_13_S" type="Sprite3D" parent="Foliage" unique_id=1689485653]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2247, 3.15, 7.6800413)
+pixel_size = 0.0781
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_14_N" type="Sprite3D" parent="Foliage" unique_id=567890269]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7166, 1.95, -3.6314096)
+pixel_size = 0.0775
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_14_S" type="Sprite3D" parent="Foliage" unique_id=354791179]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5749, 1.95, 8.6050415)
+pixel_size = 0.0847
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_15_N" type="Sprite3D" parent="Foliage" unique_id=502423956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7252, 1.95, -4.6539097)
+pixel_size = 0.0737
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_15_S" type="Sprite3D" parent="Foliage" unique_id=1393396632]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0023, 1.95, 10.292976)
+pixel_size = 0.0814
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_16_N" type="Sprite3D" parent="Foliage" unique_id=1771645341]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7635, 1.95, -4.1376095)
+pixel_size = 0.0744
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_16_S" type="Sprite3D" parent="Foliage" unique_id=429017958]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7533, 1.95, 5.93)
+pixel_size = 0.0728
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_17_N" type="Sprite3D" parent="Foliage" unique_id=925060311]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2178, 1.95, -3.4836097)
+pixel_size = 0.0831
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_17_S" type="Sprite3D" parent="Foliage" unique_id=1590380679]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.8941, 1.95, 10.066476)
+pixel_size = 0.0823
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_18_N" type="Sprite3D" parent="Foliage" unique_id=802619127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.7487, 1.95, -4.3069096)
+pixel_size = 0.0786
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_18_S" type="Sprite3D" parent="Foliage" unique_id=849261305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.6094, 1.95, 8.209141)
+pixel_size = 0.0808
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_19_N" type="Sprite3D" parent="Foliage" unique_id=398210271]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.4149, 1.95, -4.9460096)
+pixel_size = 0.0747
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_19_S" type="Sprite3D" parent="Foliage" unique_id=343693825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.8333, 1.95, 8.008041)
+pixel_size = 0.0854
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_20_N" type="Sprite3D" parent="Foliage" unique_id=679394216]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.2755, 1.95, -5.2570095)
+pixel_size = 0.0817
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_20_S" type="Sprite3D" parent="Foliage" unique_id=1663359669]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.2178, 1.95, 7.1879416)
+pixel_size = 0.0818
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_21_N" type="Sprite3D" parent="Foliage" unique_id=392936662]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9118, 1.95, -4.0315094)
+pixel_size = 0.0768
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_21_S" type="Sprite3D" parent="Foliage" unique_id=1802630463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.294, 1.95, 6.938741)
+pixel_size = 0.0738
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_22_N" type="Sprite3D" parent="Foliage" unique_id=1590719073]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.7982, 1.95, -4.0501094)
+pixel_size = 0.0859
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_22_S" type="Sprite3D" parent="Foliage" unique_id=1212234817]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.6983, 1.95, 6.4247)
+pixel_size = 0.0775
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_23_N" type="Sprite3D" parent="Foliage" unique_id=1255563220]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.2673, 1.95, -7.8349)
+pixel_size = 0.0764
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Tree_23_S" type="Sprite3D" parent="Foliage" unique_id=340047719]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.0906, 1.95, 9.414276)
+pixel_size = 0.0729
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("11_tree_prop")
+
+[node name="Grass_000" type="Sprite3D" parent="Foliage" unique_id=601811941]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.4525, 0.28, 3.4888)
+pixel_size = 0.0397
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_001" type="Sprite3D" parent="Foliage" unique_id=1479297485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5373, 0.28, 3.6054)
+pixel_size = 0.0395
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_002" type="Sprite3D" parent="Foliage" unique_id=1338112869]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.9211, 0.28, -4.775)
+pixel_size = 0.0449
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_003" type="Sprite3D" parent="Foliage" unique_id=1336199142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.5951, 0.28, -3.9543095)
+pixel_size = 0.0416
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_004" type="Sprite3D" parent="Foliage" unique_id=846457458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.0322, 0.28, 3.7873)
+pixel_size = 0.0431
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_005" type="Sprite3D" parent="Foliage" unique_id=371668068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0572, 0.28, 3.6783)
+pixel_size = 0.0414
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_006" type="Sprite3D" parent="Foliage" unique_id=1921389389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5255, 1.4453428, -2.3452096)
+pixel_size = 0.0383
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_007" type="Sprite3D" parent="Foliage" unique_id=1713855584]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.0181, 0.28, -3.7091)
+pixel_size = 0.0411
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_008" type="Sprite3D" parent="Foliage" unique_id=602465723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0678, 0.28, -2.6187096)
+pixel_size = 0.0436
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_009" type="Sprite3D" parent="Foliage" unique_id=1098499643]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0696, 0.28, -3.6548095)
+pixel_size = 0.0338
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_010" type="Sprite3D" parent="Foliage" unique_id=326229813]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.4256, 0.28, -1.9544096)
+pixel_size = 0.0369
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_011" type="Sprite3D" parent="Foliage" unique_id=630071050]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.5976, 0.28, -2.7313094)
+pixel_size = 0.0415
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_012" type="Sprite3D" parent="Foliage" unique_id=959105290]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.2564, 0.28, 4.9502)
+pixel_size = 0.0382
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_013" type="Sprite3D" parent="Foliage" unique_id=505809424]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7093, 1.48, 3.3437)
+pixel_size = 0.0364
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_014" type="Sprite3D" parent="Foliage" unique_id=1155094542]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.3391, 0.28, 4.8389)
+pixel_size = 0.0411
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_015" type="Sprite3D" parent="Foliage" unique_id=177558128]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3072, 0.28, 4.3195)
+pixel_size = 0.0416
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_016" type="Sprite3D" parent="Foliage" unique_id=318450619]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.368, 0.28, 4.9966)
+pixel_size = 0.0325
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_017" type="Sprite3D" parent="Foliage" unique_id=1765275113]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.751, 0.28, -1.6966095)
+pixel_size = 0.0339
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_018" type="Sprite3D" parent="Foliage" unique_id=1770556032]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0106, 0.28, -4.4093)
+pixel_size = 0.0417
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_019" type="Sprite3D" parent="Foliage" unique_id=371087605]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.8057, 0.28, 6.2173)
+pixel_size = 0.0428
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_020" type="Sprite3D" parent="Foliage" unique_id=1068553375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.6049, 0.28, 3.1998)
+pixel_size = 0.0355
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_021" type="Sprite3D" parent="Foliage" unique_id=1792038633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.8825, 0.28, 7.095341)
+pixel_size = 0.0346
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_022" type="Sprite3D" parent="Foliage" unique_id=496130070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0344, 0.28, -3.9105096)
+pixel_size = 0.0398
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_023" type="Sprite3D" parent="Foliage" unique_id=685504017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.5396, 0.28, 4.5175)
+pixel_size = 0.042
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_024" type="Sprite3D" parent="Foliage" unique_id=741488612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.2671, 0.28, 5.4397)
+pixel_size = 0.0367
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_025" type="Sprite3D" parent="Foliage" unique_id=2089126456]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4503, 0.28, 6.2676)
+pixel_size = 0.0444
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_026" type="Sprite3D" parent="Foliage" unique_id=1906838170]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.3314, 0.28, -3.3508096)
+pixel_size = 0.0392
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_027" type="Sprite3D" parent="Foliage" unique_id=1735418629]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3211, 1.48, 4.2505)
+pixel_size = 0.0322
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_028" type="Sprite3D" parent="Foliage" unique_id=1757849925]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.7096, 0.28, 6.0736)
+pixel_size = 0.0437
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_029" type="Sprite3D" parent="Foliage" unique_id=1535322022]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.1252, 0.28, 4.6421)
+pixel_size = 0.0373
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_030" type="Sprite3D" parent="Foliage" unique_id=1468405020]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0106, 0.28, 4.9399)
+pixel_size = 0.0412
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_031" type="Sprite3D" parent="Foliage" unique_id=1931293971]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1851, 0.28, 4.5731)
+pixel_size = 0.0388
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_032" type="Sprite3D" parent="Foliage" unique_id=813120850]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.6017, 0.28, 3.915)
+pixel_size = 0.0425
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_033" type="Sprite3D" parent="Foliage" unique_id=2043118133]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0145, 0.28, 5.2106)
+pixel_size = 0.0444
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_034" type="Sprite3D" parent="Foliage" unique_id=1233981582]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4683, 1.48, -3.8539)
+pixel_size = 0.0329
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_035" type="Sprite3D" parent="Foliage" unique_id=1174329468]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.5127, 0.28, -4.1789)
+pixel_size = 0.0356
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_036" type="Sprite3D" parent="Foliage" unique_id=204755]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0242, 0.28, 4.0473)
+pixel_size = 0.0422
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_037" type="Sprite3D" parent="Foliage" unique_id=534298248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.746, 1.48, 5.1598)
+pixel_size = 0.0374
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_038" type="Sprite3D" parent="Foliage" unique_id=15672256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8928, 0.28, -3.1503)
+pixel_size = 0.0337
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_039" type="Sprite3D" parent="Foliage" unique_id=897214982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3023, 0.28, -3.3312)
+pixel_size = 0.0359
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_040" type="Sprite3D" parent="Foliage" unique_id=2145849824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.9938, 0.28, 5.5768)
+pixel_size = 0.0323
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_041" type="Sprite3D" parent="Foliage" unique_id=1333446288]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9597, 0.28, -3.4161096)
+pixel_size = 0.0344
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_042" type="Sprite3D" parent="Foliage" unique_id=1759964361]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.4016, 0.28, 3.3107)
+pixel_size = 0.0326
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_043" type="Sprite3D" parent="Foliage" unique_id=1994723919]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.9156, 0.28, 6.2939)
+pixel_size = 0.0387
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_044" type="Sprite3D" parent="Foliage" unique_id=109075528]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.409, 1.48, -3.9801097)
+pixel_size = 0.0398
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_045" type="Sprite3D" parent="Foliage" unique_id=2089525672]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.9532, 0.28, -3.6720095)
+pixel_size = 0.0394
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_046" type="Sprite3D" parent="Foliage" unique_id=1288392372]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0114, 0.28, 5.9929)
+pixel_size = 0.0367
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_047" type="Sprite3D" parent="Foliage" unique_id=2005590979]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9067, 0.28, 5.1098)
+pixel_size = 0.0442
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_048" type="Sprite3D" parent="Foliage" unique_id=1824521306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5471, 0.28, -3.315)
+pixel_size = 0.0335
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_049" type="Sprite3D" parent="Foliage" unique_id=301078833]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.6863, 0.28, 5.6445)
+pixel_size = 0.0391
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_050" type="Sprite3D" parent="Foliage" unique_id=395630162]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.8668, 0.28, -1.5271096)
+pixel_size = 0.0375
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_051" type="Sprite3D" parent="Foliage" unique_id=420455877]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.7351, 0.28, -5.7335)
+pixel_size = 0.036
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_052" type="Sprite3D" parent="Foliage" unique_id=1934662380]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.4694, 0.28, 3.1867485)
+pixel_size = 0.0415
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_053" type="Sprite3D" parent="Foliage" unique_id=1788151350]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6586, 1.48, 6.4455)
+pixel_size = 0.0364
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_054" type="Sprite3D" parent="Foliage" unique_id=2140751638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.9056, 0.28, 3.8149)
+pixel_size = 0.0408
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_055" type="Sprite3D" parent="Foliage" unique_id=1686572629]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7468, 0.28, 5.2837)
+pixel_size = 0.0431
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_056" type="Sprite3D" parent="Foliage" unique_id=1284324137]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.648, 0.28, -3.2361097)
+pixel_size = 0.0357
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_057" type="Sprite3D" parent="Foliage" unique_id=1431915548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.912, 0.28, 5.5595)
+pixel_size = 0.0412
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_058" type="Sprite3D" parent="Foliage" unique_id=1684606438]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9489, 1.48, 4.9055)
+pixel_size = 0.0435
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_059" type="Sprite3D" parent="Foliage" unique_id=1838744348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0238, 1.48, -3.1795096)
+pixel_size = 0.0396
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_060" type="Sprite3D" parent="Foliage" unique_id=2082249872]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.4254, 0.28, -3.2501)
+pixel_size = 0.0331
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_061" type="Sprite3D" parent="Foliage" unique_id=2048403085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6219, 1.48, 7.5738416)
+pixel_size = 0.0335
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_062" type="Sprite3D" parent="Foliage" unique_id=505773760]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.9669, 0.28, -3.3279)
+pixel_size = 0.0347
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_063" type="Sprite3D" parent="Foliage" unique_id=1984567803]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0328, 1.48, 4.5478)
+pixel_size = 0.0444
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_064" type="Sprite3D" parent="Foliage" unique_id=474351710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8317, 0.28, 7.4693413)
+pixel_size = 0.0402
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_065" type="Sprite3D" parent="Foliage" unique_id=330544077]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3935, 1.48, -2.9922)
+pixel_size = 0.0386
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_066" type="Sprite3D" parent="Foliage" unique_id=1153766798]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0173, 0.28, 3.7372)
+pixel_size = 0.0438
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_067" type="Sprite3D" parent="Foliage" unique_id=1606981849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.8695, 0.28, 3.5349)
+pixel_size = 0.0403
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_068" type="Sprite3D" parent="Foliage" unique_id=935071013]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.2834, 0.28, -2.6097097)
+pixel_size = 0.0416
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_069" type="Sprite3D" parent="Foliage" unique_id=1818386103]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.1775, 0.28, -2.1783094)
+pixel_size = 0.0419
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_070" type="Sprite3D" parent="Foliage" unique_id=1282513098]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2333, 0.28, 5.9691)
+pixel_size = 0.035
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_071" type="Sprite3D" parent="Foliage" unique_id=164824202]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.9487, 0.28, -4.2876)
+pixel_size = 0.0425
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_072" type="Sprite3D" parent="Foliage" unique_id=1059224825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.1589, 0.5830028, -3.0616)
+pixel_size = 0.0327
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_073" type="Sprite3D" parent="Foliage" unique_id=705210370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.7874, 0.28, 4.4055)
+pixel_size = 0.0327
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_074" type="Sprite3D" parent="Foliage" unique_id=1230599761]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.0095, 0.28, -5.1541)
+pixel_size = 0.0417
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_075" type="Sprite3D" parent="Foliage" unique_id=2118271748]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0882, 0.28, 5.8298)
+pixel_size = 0.0448
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_076" type="Sprite3D" parent="Foliage" unique_id=1247554323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.0063, 0.28, -1.8400097)
+pixel_size = 0.0332
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_077" type="Sprite3D" parent="Foliage" unique_id=697530003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1105, 0.28, -3.9661098)
+pixel_size = 0.0353
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_078" type="Sprite3D" parent="Foliage" unique_id=804300690]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3576, 0.28, 5.5325)
+pixel_size = 0.0404
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_079" type="Sprite3D" parent="Foliage" unique_id=1275847839]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.8263, 0.28, -2.5113096)
+pixel_size = 0.0334
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_080" type="Sprite3D" parent="Foliage" unique_id=988168167]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3175, 0.28, 4.3048)
+pixel_size = 0.035
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_081" type="Sprite3D" parent="Foliage" unique_id=980849148]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6483, 0.28, -3.6372094)
+pixel_size = 0.0365
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_082" type="Sprite3D" parent="Foliage" unique_id=63955064]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.4803, 0.28, 3.5996)
+pixel_size = 0.0417
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_083" type="Sprite3D" parent="Foliage" unique_id=338106063]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3983, 0.28, 3.1841)
+pixel_size = 0.0388
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_084" type="Sprite3D" parent="Foliage" unique_id=314385009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6744, 0.28, 4.9386)
+pixel_size = 0.0383
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_085" type="Sprite3D" parent="Foliage" unique_id=985017480]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.7449, 0.28, 2.9986)
+pixel_size = 0.038
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_086" type="Sprite3D" parent="Foliage" unique_id=784078184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.932, 0.28, 5.2187)
+pixel_size = 0.0391
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_087" type="Sprite3D" parent="Foliage" unique_id=1618514232]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4479, 1.48, 5.3272)
+pixel_size = 0.0366
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_088" type="Sprite3D" parent="Foliage" unique_id=813019543]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.9416, 0.28, 5.4385)
+pixel_size = 0.0436
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_089" type="Sprite3D" parent="Foliage" unique_id=453491275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.602, 0.28, 3.2338)
+pixel_size = 0.0337
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_090" type="Sprite3D" parent="Foliage" unique_id=2044659570]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3874, 0.28, -4.2577)
+pixel_size = 0.04
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_091" type="Sprite3D" parent="Foliage" unique_id=1227002688]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.0868, 0.28, 5.1547)
+pixel_size = 0.0438
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_092" type="Sprite3D" parent="Foliage" unique_id=448252470]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8798, 0.28, 3.2388)
+pixel_size = 0.0389
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_093" type="Sprite3D" parent="Foliage" unique_id=1667583282]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8097, 1.1627614, -2.6126094)
+pixel_size = 0.0356
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_094" type="Sprite3D" parent="Foliage" unique_id=1243648796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8963, 0.28, -3.5986)
+pixel_size = 0.0329
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_095" type="Sprite3D" parent="Foliage" unique_id=456289637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.3358, 0.28, -3.8497)
+pixel_size = 0.0326
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_096" type="Sprite3D" parent="Foliage" unique_id=1086931544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.4206, 0.28, -0.9617095)
+pixel_size = 0.0325
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_097" type="Sprite3D" parent="Foliage" unique_id=764907840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0274, 1.48, -3.8808098)
+pixel_size = 0.0441
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_098" type="Sprite3D" parent="Foliage" unique_id=1436861446]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.3, 0.28, -3.5342097)
+pixel_size = 0.0428
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_099" type="Sprite3D" parent="Foliage" unique_id=1594160833]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9359, 1.48, -2.3217096)
+pixel_size = 0.043
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_100" type="Sprite3D" parent="Foliage" unique_id=296485954]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5714, 0.28, -4.7302)
+pixel_size = 0.0387
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_101" type="Sprite3D" parent="Foliage" unique_id=1759936897]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.919, 0.28, -3.3194094)
+pixel_size = 0.0436
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_102" type="Sprite3D" parent="Foliage" unique_id=371282239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5812, 0.28, 5.1982)
+pixel_size = 0.0381
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_103" type="Sprite3D" parent="Foliage" unique_id=1538789131]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2127, 0.28, -1.1836095)
+pixel_size = 0.0404
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_104" type="Sprite3D" parent="Foliage" unique_id=1022262205]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.6417, 0.28, 6.03)
+pixel_size = 0.035
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_105" type="Sprite3D" parent="Foliage" unique_id=1101395571]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.5001, 0.28, 3.8192)
+pixel_size = 0.0375
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_106" type="Sprite3D" parent="Foliage" unique_id=1808492371]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2963, 1.48, -2.1762094)
+pixel_size = 0.0401
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_107" type="Sprite3D" parent="Foliage" unique_id=837762418]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.0096, 0.28, 2.964)
+pixel_size = 0.0434
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_108" type="Sprite3D" parent="Foliage" unique_id=2043386443]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.2865, 0.28, -3.5853)
+pixel_size = 0.0355
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_109" type="Sprite3D" parent="Foliage" unique_id=553102749]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.462, 0.28, -1.0968096)
+pixel_size = 0.044
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_110" type="Sprite3D" parent="Foliage" unique_id=1929698651]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5235, 0.28, 4.5247)
+pixel_size = 0.0321
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_111" type="Sprite3D" parent="Foliage" unique_id=1970676763]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0673, 0.28, 3.4751)
+pixel_size = 0.0404
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_112" type="Sprite3D" parent="Foliage" unique_id=54361996]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.6954, 0.28, 2.998)
+pixel_size = 0.0406
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_113" type="Sprite3D" parent="Foliage" unique_id=1927081269]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.4332, 0.28, 4.898)
+pixel_size = 0.0448
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_114" type="Sprite3D" parent="Foliage" unique_id=73238799]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5634, 0.28, -1.9028096)
+pixel_size = 0.0371
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_115" type="Sprite3D" parent="Foliage" unique_id=948897145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.9806, 0.28, 6.4825)
+pixel_size = 0.0406
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_116" type="Sprite3D" parent="Foliage" unique_id=89908649]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5237, 0.28, 5.7589)
+pixel_size = 0.0346
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_117" type="Sprite3D" parent="Foliage" unique_id=1623807462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.7568, 0.28, -3.9153094)
+pixel_size = 0.0386
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_118" type="Sprite3D" parent="Foliage" unique_id=1710276684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4145, 0.28, 5.9474)
+pixel_size = 0.034
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_119" type="Sprite3D" parent="Foliage" unique_id=2110995401]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.9691, 0.28, 3.9445)
+pixel_size = 0.0423
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_120" type="Sprite3D" parent="Foliage" unique_id=1416108440]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.9771, 0.28, -3.9247)
+pixel_size = 0.0331
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_121" type="Sprite3D" parent="Foliage" unique_id=37508830]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9598, 1.48, 5.7092)
+pixel_size = 0.0373
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_122" type="Sprite3D" parent="Foliage" unique_id=686066104]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4887, 0.28, -3.0546098)
+pixel_size = 0.0441
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_123" type="Sprite3D" parent="Foliage" unique_id=478909721]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.8647, 0.28, -5.0185)
+pixel_size = 0.0379
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_124" type="Sprite3D" parent="Foliage" unique_id=2030792027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4986, 0.28, -3.1684093)
+pixel_size = 0.0352
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_125" type="Sprite3D" parent="Foliage" unique_id=1252880160]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.6745, 0.28, 4.3291)
+pixel_size = 0.0406
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_126" type="Sprite3D" parent="Foliage" unique_id=100951451]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.9823, 1.1393406, 1.5685582)
+pixel_size = 0.0358
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_127" type="Sprite3D" parent="Foliage" unique_id=2001977984]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.6433, 0.28, -3.0605097)
+pixel_size = 0.0325
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_128" type="Sprite3D" parent="Foliage" unique_id=2033473673]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.2793, 0.28, -1.8164096)
+pixel_size = 0.0343
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_129" type="Sprite3D" parent="Foliage" unique_id=934482007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1724, 0.28, 5.7005)
+pixel_size = 0.0415
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_130" type="Sprite3D" parent="Foliage" unique_id=441123005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.49, 0.28, -2.9479094)
+pixel_size = 0.0426
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_131" type="Sprite3D" parent="Foliage" unique_id=1873901758]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.133, 0.28, 3.64)
+pixel_size = 0.0417
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_132" type="Sprite3D" parent="Foliage" unique_id=1888338655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.367, 0.28, 3.8882)
+pixel_size = 0.0363
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_133" type="Sprite3D" parent="Foliage" unique_id=357577758]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.7371, 0.28, -4.3351)
+pixel_size = 0.0427
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_134" type="Sprite3D" parent="Foliage" unique_id=1566186893]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.1272, 0.28, -4.5236)
+pixel_size = 0.0404
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_135" type="Sprite3D" parent="Foliage" unique_id=1557104605]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9167, 1.48, -3.2443)
+pixel_size = 0.042
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_136" type="Sprite3D" parent="Foliage" unique_id=2025357046]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5372, 0.28, 3.8689)
+pixel_size = 0.0331
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_137" type="Sprite3D" parent="Foliage" unique_id=1311603334]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5387, 0.28, -2.9416094)
+pixel_size = 0.0343
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_138" type="Sprite3D" parent="Foliage" unique_id=61075427]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.8172, 0.28, -3.9594097)
+pixel_size = 0.0367
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Grass_139" type="Sprite3D" parent="Foliage" unique_id=203672503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.9986, 0.28, -1.6757097)
+pixel_size = 0.0347
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_grass")
+
+[node name="Clouds" type="Node3D" parent="." unique_id=1212425291]
+
+[node name="Cloud_0" type="Sprite3D" parent="Clouds" unique_id=1121108930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 5.8, -15)
+pixel_size = 0.004
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("14_cloud")
+
+[node name="Cloud_1" type="Sprite3D" parent="Clouds" unique_id=1818060244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 6.45, -15)
+pixel_size = 0.004
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("14_cloud")
+
+[node name="Cloud_2" type="Sprite3D" parent="Clouds" unique_id=304666003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 7.1, -15)
+pixel_size = 0.004
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("14_cloud")
+
+[node name="Cloud_3" type="Sprite3D" parent="Clouds" unique_id=950100047]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5.8, -15)
+pixel_size = 0.004
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("14_cloud")
+
+[node name="Cloud_4" type="Sprite3D" parent="Clouds" unique_id=806247923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 6.45, -15)
+pixel_size = 0.004
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("14_cloud")
+
+[node name="Cloud_5" type="Sprite3D" parent="Clouds" unique_id=2038456100]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 7.1, -15)
+pixel_size = 0.004
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("14_cloud")
+
+[node name="Cloud_6" type="Sprite3D" parent="Clouds" unique_id=527643787]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 5.8, -15)
+pixel_size = 0.004
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("14_cloud")
+
+[node name="Cloud_7" type="Sprite3D" parent="Clouds" unique_id=1109184969]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 6.45, -15)
+pixel_size = 0.004
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("14_cloud")
+
+[node name="DirtTrail" type="Node3D" parent="."]
+
+[node name="HomeTrail" type="MeshInstance3D" parent="DirtTrail"]
+position = Vector3(-33, 0.055, 0)
+rotation_degrees = Vector3(0, 0, 0)
+mesh = SubResource("TrailMesh_0")
+material_override = SubResource("Mat_path_texture")
+
+[node name="RockTrail" type="MeshInstance3D" parent="DirtTrail"]
+position = Vector3(-15.5, 0.055, 0)
+rotation_degrees = Vector3(0, 0, 0)
+mesh = SubResource("TrailMesh_1")
+material_override = SubResource("Mat_path_texture")
+
+[node name="RiseTrail" type="MeshInstance3D" parent="DirtTrail"]
+position = Vector3(-9, 0.655, 0)
+rotation_degrees = Vector3(0, 0, 8.53)
+mesh = SubResource("TrailMesh_2")
+material_override = SubResource("Mat_path_texture")
+
+[node name="TreeTrail" type="MeshInstance3D" parent="DirtTrail"]
+position = Vector3(1.5, 1.255, 0)
+rotation_degrees = Vector3(0, 0, 0)
+mesh = SubResource("TrailMesh_3")
+material_override = SubResource("Mat_path_texture")
+
+[node name="FallTrail" type="MeshInstance3D" parent="DirtTrail"]
+position = Vector3(12, 0.655, 0)
+rotation_degrees = Vector3(0, 0, -8.53)
+mesh = SubResource("TrailMesh_4")
+material_override = SubResource("Mat_path_texture")
+
+[node name="RobotTrail" type="MeshInstance3D" parent="DirtTrail"]
+position = Vector3(32.5, 0.055, 0)
+rotation_degrees = Vector3(0, 0, 0)
+mesh = SubResource("TrailMesh_5")
+material_override = SubResource("Mat_path_texture")
+
+[node name="PotGoal" type="Area3D" parent="." unique_id=365292243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 0.54529715, 0)
+
+[node name="PotSprite" type="Sprite3D" parent="PotGoal" unique_id=919158291]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 0)
+pixel_size = 0.045
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("13_pot")
+
+[node name="Collision" type="CollisionShape3D" parent="PotGoal" unique_id=1442599016]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("LevelShape_6")
+
+[node name="GoalGlow" type="OmniLight3D" parent="PotGoal" unique_id=252435086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+light_color = Color(1, 0.74, 0.25, 1)
+light_energy = 1.5
+omni_range = 4.0
+
+[node name="HomeSign" type="Label3D" parent="." unique_id=1787093701]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43, 2.4, -3.6)
+pixel_size = 0.012
+billboard = 1
+modulate = Color(1, 0.91, 0.55, 1)
+outline_modulate = Color(0.07, 0.09, 0.13, 1)
+text = "HOME"
+font_size = 48
+
+[node name="GoalSign" type="Label3D" parent="." unique_id=1795221574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41, 2.4, -1.0916095)
+pixel_size = 0.012
+billboard = 1
+modulate = Color(1, 0.91, 0.55, 1)
+outline_modulate = Color(0.07, 0.09, 0.13, 1)
+text = "GOLD"
+font_size = 48
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1511977685]
+
+[node name="Controls" type="Label" parent="HUD" unique_id=1633633029]
+offset_left = 18.0
+offset_top = 16.0
+offset_right = 380.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0.95, 0.97, 0.91, 1)
+theme_override_font_sizes/font_size = 18
+text = "WASD: Move    Mouse: Attack    Space: Shrink    1 / 2 / 3: Toggle arena enemies"
+
+[node name="CombatStatus" type="Label" parent="HUD" unique_id=1846334061]
+offset_left = 18.0
+offset_top = 48.0
+offset_right = 380.0
+offset_bottom = 78.0
+theme_override_colors/font_color = Color(1, 0.89, 0.54, 1)
+theme_override_font_sizes/font_size = 18
+
+[node name="WinLabel" type="Label" parent="HUD" unique_id=136356391]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -50.0
+offset_right = 180.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(1, 0.87, 0.27, 1)
+theme_override_colors/font_outline_color = Color(0.07, 0.09, 0.13, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 56
+text = "YOU WIN!"
+
+[node name="ShrinkHint" type="Label" parent="HUD"]
+visible = false
+offset_left = 18.0
+offset_top = 82.0
+offset_right = 520.0
+offset_bottom = 118.0
+theme_override_colors/font_color = Color(1, 0.89, 0.48, 1)
+theme_override_colors/font_outline_color = Color(0.07, 0.09, 0.13, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 22
+text = "Press SPACE to shrink under the log"
+horizontal_alignment = 1
+vertical_alignment = 1

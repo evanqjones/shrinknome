@@ -1,0 +1,138 @@
+[gd_scene load_steps=12 format=3 uid="uid://brwqlh8owgmo4"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_player"]
+[ext_resource type="Script" path="res://scripts/enemy_patrol.gd" id="3_enemy"]
+[ext_resource type="Script" path="res://scripts/rock_enemy.gd" id="8_rock_enemy"]
+[ext_resource type="Script" path="res://scripts/tree_enemy.gd" id="9_tree_enemy"]
+[ext_resource type="Script" path="res://scripts/robot_enemy.gd" id="10_robot_enemy"]
+[ext_resource type="SpriteFrames" path="res://resources/elf_frames.tres" id="4_elf"]
+[ext_resource type="SpriteFrames" path="res://resources/rock_frames.tres" id="5_rock"]
+[ext_resource type="SpriteFrames" path="res://resources/tree_frames.tres" id="6_tree"]
+[ext_resource type="SpriteFrames" path="res://resources/robot_frames.tres" id="7_robot"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ground"]
+size = Vector3(30, 0.2, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape_ground"]
+size = Vector3(30, 0.2, 20)
+
+[sub_resource type="StandardMaterial3D" id="Material_ground"]
+albedo_color = Color(0.17, 0.24, 0.22, 1)
+roughness = 1.0
+
+[sub_resource type="CapsuleShape3D" id="Capsule_player"]
+radius = 0.32
+height = 1.7
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+position = Vector3(0, -0.1, 0)
+
+[node name="GroundMesh" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_ground")
+material_override = SubResource("Material_ground")
+
+[node name="GroundCollision" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape_ground")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-55, -25, 0)
+light_energy = 1.4
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="FollowCamera" type="Camera3D" parent="."]
+current = true
+fov = 62.0
+near = 0.1
+far = 100.0
+
+[node name="Player" type="CharacterBody3D" parent="."]
+position = Vector3(0, 0.87, 0)
+script = ExtResource("2_player")
+
+[node name="Collision" type="CollisionShape3D" parent="Player"]
+shape = SubResource("Capsule_player")
+
+[node name="Visual" type="AnimatedSprite3D" parent="Player"]
+cast_shadow = 0
+sprite_frames = ExtResource("4_elf")
+animation = &"idle"
+pixel_size = 0.03
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+
+[node name="Rock" type="Node3D" parent="."]
+position = Vector3(-4.2, 0, -3.2)
+script = ExtResource("8_rock_enemy")
+
+[node name="Visual" type="AnimatedSprite3D" parent="Rock"]
+cast_shadow = 0
+position = Vector3(0, 0.988, 0)
+sprite_frames = ExtResource("5_rock")
+animation = &"idle"
+pixel_size = 0.0442
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+
+[node name="Tree" type="Node3D" parent="."]
+position = Vector3(4.0, 0, -2.2)
+script = ExtResource("9_tree_enemy")
+patrol_distance = 1.6
+move_speed = 0.95
+pause_seconds = 1.0
+start_direction = -1
+
+[node name="Visual" type="AnimatedSprite3D" parent="Tree"]
+cast_shadow = 0
+position = Vector3(0, 1.066, 0)
+sprite_frames = ExtResource("6_tree")
+animation = &"idle"
+pixel_size = 0.0377
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+
+[node name="Robot" type="Node3D" parent="."]
+position = Vector3(1.7, 0, 3.1)
+script = ExtResource("10_robot_enemy")
+patrol_distance = 2.0
+move_speed = 1.25
+pause_seconds = 1.6
+start_direction = -1
+
+[node name="Visual" type="AnimatedSprite3D" parent="Robot"]
+cast_shadow = 0
+position = Vector3(0, 1.235, 0)
+sprite_frames = ExtResource("7_robot")
+animation = &"idle"
+pixel_size = 0.0455
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Controls" type="Label" parent="HUD"]
+offset_left = 18.0
+offset_top = 16.0
+offset_right = 380.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0.95, 0.97, 0.91, 1)
+theme_override_font_sizes/font_size = 18
+text = "WASD / Arrow keys: Move    1 / 2 / 3: Toggle enemy combat"
+
+[node name="CombatStatus" type="Label" parent="HUD"]
+offset_left = 18.0
+offset_top = 48.0
+offset_right = 380.0
+offset_bottom = 78.0
+theme_override_colors/font_color = Color(1, 0.89, 0.54, 1)
+theme_override_font_sizes/font_size = 18
+text = ""
